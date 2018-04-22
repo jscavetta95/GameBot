@@ -29,7 +29,7 @@ async def vote(ctx, num_voters):
     with open(GAME_LIST, "r") as output_handle:
         games = output_handle.read()
     games = games.split("\n")
-    weights = list()
+    weighted_choices = list()
     for game in games:
         if(game != ""):
             print("GAME: " + game)
@@ -43,10 +43,11 @@ async def vote(ctx, num_voters):
             for i in range(int(num_voters)):
                 msg = await bot.wait_for_message(check=check)
                 total_vote += int(msg.content)
-            weights.append(total_vote)
+            for i in range(total_vote):
+                weighted_choices.append(game)
         else:
             games.remove(game)
-    choices = random.choices(games, weights)
+    choices = random.sample(games, 1)
     await bot.say("Play:")
     for choice in choices:
         await bot.say("\t" + choice)
