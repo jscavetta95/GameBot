@@ -47,7 +47,7 @@ async def vote(ctx, num_voters):
                 weighted_choices.append(game)
         else:
             games.remove(game)
-    choices = random.sample(games, 1)
+    choices = random.sample(weighted_choices, 1)
     await bot.say("Play:")
     for choice in choices:
         await bot.say("\t" + choice)
