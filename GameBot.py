@@ -30,7 +30,6 @@ async def vote(ctx, num_voters):
         games = output_handle.read()
     games = games.split("\n")
     weighted_choices = list()
-    skip = False
 
     for game in games:
         if(game != ""):
@@ -43,7 +42,8 @@ async def vote(ctx, num_voters):
                     return False
 
             total_vote = 0
-            for i in range(int(num_voters)) and not skip:
+            skip = False
+            for i in range(int(num_voters)):
                 msg = await bot.wait_for_message(check=check)
                 msg = int(msg.content)
 
@@ -53,8 +53,9 @@ async def vote(ctx, num_voters):
                 else:
                     total_vote += int(msg.content)
 
-            for i in range(total_vote) and not skip:
-                weighted_choices.append(game)
+            if not skip:
+                for i in range(total_vote):
+                    weighted_choices.append(game)
         else:
             games.remove(game)
 
