@@ -49,7 +49,7 @@ async def vote(ctx, num_voters):
 
                 if msg == 0:
                     skip = True
-                    games.remove(game)
+                    break
                 else:
                     total_vote += msg
 
