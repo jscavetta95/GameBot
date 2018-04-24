@@ -61,7 +61,7 @@ async def vote(ctx, num_voters):
 
     choices = list()
     for i in range(len(games)):
-        choice = sample(weighted_choices, 1)
+        choice = random.sample(weighted_choices, 1)
         weighted_choices[:] = (value for value in weighted_choices if value != choice)
         choices.append(choice)
 
