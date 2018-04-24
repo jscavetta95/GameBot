@@ -51,7 +51,7 @@ async def vote(ctx, num_voters):
                     skip = True
                     games.remove(game)
                 else:
-                    total_vote += int(msg.content)
+                    total_vote += msg
 
             if not skip:
                 for i in range(total_vote):
