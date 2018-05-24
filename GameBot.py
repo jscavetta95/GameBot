@@ -13,7 +13,13 @@ async def on_ready():
     print ("Ready.")
 
 @bot.command(pass_context=True)
-async def game_list(ctx, *games):
+async def games(ctx):
+    with open(GAME_LIST, "r") as output_handle:
+        games = output_handle.read()
+        await bot.say("Game List:\n" + games)
+
+@bot.command(pass_context=True)
+async def update_games(ctx, *games):
     await bot.say("Updating game list...")
     game_list = ""
     with open(GAME_LIST, "w") as output_handle:
