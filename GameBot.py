@@ -70,10 +70,12 @@ async def vote(ctx, num_voters):
         weighted_choices[:] = (value for value in weighted_choices if value != choice)
         choices.append(choice)
 
-    await bot.say("Play:")
+    message = "Play:"
     i = 1
     for choice in choices:
-        await bot.say("\t{}. {}".format(i, choice))
+        message = ("{}\t{}. {}".format(message, i, choice))
         i += 1
+    await bot.say(message)
+
 
 bot.run("NDM3NDUxNzAwNjk4MDg3NDI1.Db2SVA.7M7UxEy9F9-SN5IrtTTOFg7v-mQ")
