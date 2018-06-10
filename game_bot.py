@@ -1,6 +1,6 @@
 """GameBot
 Author: Joseph Scavetta
-Last Update: 5/28/2018
+Last Update: 6/10/2018
 
 Creates and maintains a list of games that users can vote on.
 Games to play are listed based on a weighted randomization.
@@ -15,6 +15,7 @@ from discord.ext.commands import Bot
 BOT = commands.Bot(command_prefix='#')
 
 GAME_LIST = "game_list.txt"
+NO_MEMORY_DELETING_PLZ = "secret.txt"
 
 def __game_list__():
     """Reads and returns the game list."""
@@ -29,12 +30,12 @@ async def on_ready():
 
 @BOT.command(pass_context=True)
 async def games(ctx):
-    """Bot command to list the games currently in the list."""
+    """Displays the games currently in the game list."""
     await BOT.say("Game List:\n" + __game_list__())
 
 @BOT.command(pass_context=True)
 async def add_game(ctx, game_to_add):
-    """Bot command to add a game to the list."""
+    """Adds a game to the game list."""
     with open(GAME_LIST, 'r') as output_handle:
         games = output_handle.read()
     games = games.split("\n")
@@ -47,7 +48,7 @@ async def add_game(ctx, game_to_add):
 
 @BOT.command(pass_context=True)
 async def remove_game(ctx, game_to_remove):
-    """Bot command to remove a game from the list."""
+    """Removes a game from the game list."""
     with open(GAME_LIST, 'r') as output_handle:
         games = output_handle.read()
     games = games.split("\n")
@@ -62,7 +63,7 @@ async def remove_game(ctx, game_to_remove):
 
 @BOT.command(pass_context=True)
 async def update_games(ctx, *games):
-    """Bot command to update the entire game list."""
+    """Updates the entire game list."""
     with open(GAME_LIST, "w") as output_handle:
         for game in games:
             if game != "":
@@ -71,7 +72,7 @@ async def update_games(ctx, *games):
 
 @BOT.command(pass_context=True)
 async def vote(ctx, num_voters):
-    """Bot command start the game to play vote."""
+    """Starts the, which game to play, vote."""
     games = ""
     with open(GAME_LIST, "r") as output_handle:
         games = output_handle.read()
@@ -119,4 +120,8 @@ async def vote(ctx, num_voters):
         i += 1
     await BOT.say(message)
 
-BOT.run("NDM3NDUxNzAwNjk4MDg3NDI1.Db2SVA.7M7UxEy9F9-SN5IrtTTOFg7v-mQ")
+
+with open(NO_MEMORY_DELETING_PLZ, "r") as output_handle:
+    key = output_handle.read()
+
+BOT.run(key)
