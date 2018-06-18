@@ -1,6 +1,6 @@
 """GameBot
 Author: Joseph Scavetta
-Last Update: 6/10/2018
+Last Update: 6/18/2018
 
 Creates and maintains a list of games that users can vote on.
 Games to play are listed based on a weighted randomization.
@@ -124,4 +124,4 @@ async def vote(ctx, num_voters):
 with open(NO_MEMORY_DELETING_PLZ, "r") as output_handle:
     key = output_handle.read()
 
-BOT.run(key)
+BOT.run(key.strip())
